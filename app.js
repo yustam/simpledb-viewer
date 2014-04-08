@@ -1,6 +1,8 @@
 var express = require('express');
 var routes = require('./routes/index');
 var domain = require('./api/domain');
+var search = require('./api/search');
+var del = require('./api/delete');
 var http = require('http');
 var path = require('path');
 
@@ -25,6 +27,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/domains', domain.list_domains);
+app.get('/search/:domain', search.select_all);
+app.get('/delete/:domain/:level', del.delete_level);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
